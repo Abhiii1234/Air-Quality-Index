@@ -16,7 +16,9 @@ function App() {
         setAqiData(null);
 
         try {
-            const response = await axios.get(`http://localhost:3000/api/search`, {
+            // Use environment variable for production, fallback to localhost for development
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            const response = await axios.get(`${API_URL}/api/search`, {
                 params: { city }
             });
             setAqiData(response.data);
